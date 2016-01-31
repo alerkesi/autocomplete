@@ -14,7 +14,7 @@ module.exports = {
             {
                 test: /\.(j|t)sx?$/,
                 loaders: [
-                    'babel-loader'
+                    'babel-loader?cacheDirectory=babel_cache'
                 ]
             },
             {
