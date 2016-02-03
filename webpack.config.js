@@ -6,7 +6,6 @@ module.exports = {
         path: __dirname + '\\release\\dev\\scripts'
     },
     resolve: {
-        //root: __dirname + '\\src\\scripts',
         extensions: ['', '.js', '.jsx', '.ts', '.tsx']
     },
     module: {

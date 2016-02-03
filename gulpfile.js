@@ -14,3 +14,5 @@ gulp.task('webpack', function(callback) {
         callback();
     });
 });
+
+gulp.task('b', ['webpack']);
