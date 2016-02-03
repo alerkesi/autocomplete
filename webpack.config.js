@@ -24,5 +24,8 @@ module.exports = {
                 ]
             }
         ]
+    },
+    ts: {
+        transpileOnly: false
     }
 };
