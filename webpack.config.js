@@ -6,8 +6,10 @@ module.exports = {
         path: __dirname + '\\release\\dev\\scripts'
     },
     resolve: {
-        extensions: ['', '.js', '.jsx', '.ts', '.tsx']
+        root: __dirname +'\\src\\scripts',
+        extensions: ['', '.js', '.jsx', '.ts', '.tsx', '.styl']
     },
+    devtool: '#source-map',
     module: {
         loaders: [
             {

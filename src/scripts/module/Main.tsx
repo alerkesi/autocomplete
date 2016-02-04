@@ -1,45 +1,64 @@
 import * as React from 'react';
-import {Autocomplete} from './Autocomplete2';
 
-import './styles/s.styl';
+import {Autocomplete, IUser} from './components/autocomplete/Autocomplete';
 
-const data = [
-    {id: 1, name: 'qqwerty'},
-    {id: 2, name: 'qwqerty'},
-    {id: 3, name: 'qweqrty'},
-    {id: 4, name: 'qwerqty'},
-    {id: 5, name: 'qwertqy'},
-    {id: 6, name: 'qwertyq'},
-    {id: 7, name: 'qawerty'},
-    {id: 8, name: 'qwaerty'},
-    {id: 9, name: 'asdf'}
+import './styles/style';
+
+const data: IUser[] = [
+    {id: 1, lastName: 'Иванов'},
+    {id: 2, lastName: 'Петров'},
+    {id: 3, lastName: 'Сидоров'},
+    {id: 4, lastName: 'Петрович'},
+    {id: 5, lastName: 'Петрован'},
+    {id: 6, lastName: 'Петруха'},
+    {id: 7, lastName: 'Петрушка'},
+    {id: 8, lastName: 'Перышко'},
+    {id: 9, lastName: 'Иванищев-Сидорищев'},
+    {id: 10, lastName: 'Каколия'}
 ];
 
-class Main extends React.Component<any, any> {
-    private getDataFromServer(search):Promise<any> {
-        const regExp = new RegExp(search);
+interface IMainState {
+    selectedItem: IUser;
+}
+
+class Main extends React.Component<any, IMainState> {
+    constructor() {
+        super();
+
+        this.state = {
+            selectedItem: null
+        };
+
+        this.valueLink = this.valueLink.bind(this);
+    }
+
+    getDataFromServer(search): Promise<any> {
+        const regExp = new RegExp(search.toLowerCase());
 
         return new Promise((resolve, reject) => setTimeout(() =>
-            resolve(data.filter(item => regExp.test(item.name))), 1000)
+            resolve(data.filter(item => regExp.test(item.lastName.toLowerCase()))), 1000)
         );
     }
 
-    private linkState():void {
-
+    valueLink(item: IUser): void {
+        this.setState({
+            selectedItem: item
+        })
     }
 
-    private itemRender(item):JSX.Element {
-        return <span>{item.name}</span>;
+    itemRender(item: IUser): JSX.Element {
+        return <span>{item.lastName}</span>;
     }
 
-    public render():JSX.Element {
+    render(): JSX.Element {
         return (
-            <div className="main">
+            <div className='main'>
+                {this.state.selectedItem && <span className='selected-item'>{this.state.selectedItem.lastName}</span>}
                 <Autocomplete
-                    valueLink={this.linkState}
+                    valueLink={this.valueLink}
                     fetch={this.getDataFromServer}
                     itemRender={this.itemRender}
-                    placeholder="Введите фамилию пользователя"
+                    placeholder={'Введите фамилию пользователя'}
                 />
             </div>
         );

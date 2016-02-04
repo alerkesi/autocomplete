@@ -1,0 +1,33 @@
+$fontSize = 14px
+$borderColor = #e2e2e2
+
+.input
+    width 100%
+
+.dropdown-menu
+    min-width auto
+    width 100%
+    display none
+    max-heigth 400px
+
+    &.is-open
+        display block
+        border 1px solid $borderColor
+        background-color #fff
+        box-shadow 5px 8.66px 20px 0 rgba(0, 0, 0, 0.15)
+
+.dropdown-list
+    height auto
+    overflow auto
+    list-style none
+    padding 5px
+
+.dropdown-item
+    margin-bottom 5px
+
+    &.is-active
+        background-color #ccc
+        color white
+
+.dropdown-link
+    text-transform none
