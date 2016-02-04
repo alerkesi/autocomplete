@@ -14,8 +14,7 @@ const nodeInRoot: Function = (node, root) => {
     return false;
 };
 
-const noop: Function = (): void => {
-};
+const noop: Function = (): void => {};
 
 interface IAutocompleteProps {
     valueLink: Function;
@@ -204,15 +203,7 @@ class Autocomplete extends React.Component<IAutocompleteProps, IAutocompleteStat
     focusSiblingOption(dir): void {
         var ops = this.state.results;
 
-        if (!this.state.isOpen) {
-            this.setState({
-                isOpen: true,
-                focusedIndex: 0
-            });
-            return;
-        }
-
-        if (!ops.length) {
+        if (!ops || !ops.length) {
             return;
         }
 

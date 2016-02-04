@@ -1,3 +1,7 @@
+'use strict';
+
+var HtmlWebpackPlugin = require('html-webpack-plugin');
+
 module.exports = {
     context: __dirname +'\\src\\scripts',
     entry: './index.js',
@@ -38,5 +42,9 @@ module.exports = {
     },
     ts: {
         transpileOnly: true
-    }
+    },
+    plugins: [new HtmlWebpackPlugin({
+        template: 'index.html',
+        inject: false
+    })]
 };
