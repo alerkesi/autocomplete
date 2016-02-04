@@ -1,5 +1,5 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
-import {Autocomplete} from './components/Autocomplete';
+import {Main} from './module/Main';
 
-ReactDOM.render(<Autocomplete />, document.getElementById('app'));
+ReactDOM.render(<Main />, document.getElementById('app'));

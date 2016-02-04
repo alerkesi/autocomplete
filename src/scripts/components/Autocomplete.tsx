@@ -1,17 +1,14 @@
 import * as React from 'react';
-
-interface IItem {
-    [index: string]: any;
-}
+import ResponseSuccess from './api/ResponseSuccess';
 
 interface IAutocompleteProps {
-    items: IItem[];
-    searchKeys: string[];
+    valueLink: Function;
+    fetch: (search:string) => Promise<ResponseSuccess<any[]>>;
+    itemRender: () => React.Component;
 }
 
 interface IAutocompleteState {
-    items: IItem[];
-    searchPhrase: string;
+    items: any[];
 }
 
 class Autocomplete extends React.Component<IAutocompleteProps, IAutocompleteState> {
@@ -19,48 +16,44 @@ class Autocomplete extends React.Component<IAutocompleteProps, IAutocompleteStat
         super();
 
         this.state = {
-            searchPhrase: '',
             items: []
         };
 
-        const searchHash: {[index: string]: IItem};
-
-        this.props.items = this.props.items.map(item => {
-            let searchKey: string = '';
-            this.props.searchKeys.forEach(key => {
-                    if (item[key]) {
-                        searchKey += item[key]
-                    }
-                }
-            )
-        })
     }
 
-    handleTypeText(searchString: String): void {
-        const items = this.props.items;
+    private handleTypeText(searchString: string): void {
+        const searchPromise: Promise<ResponseSuccess<any[]>> = this.props.fetch(searchString);
 
-        this.setState({
-            searchPhrase: searchString,
-            items: items.filter(item => item[])
-        })
+        searchPromise
+            .then((response) => {
+                //if (response.data === 200) {
+                    //if (response.body) {
+                    //    this.setState({
+                    //        items: response.body
+                    //    })
+                    //} else if (response.body.length === 0) {
+                    //    this.setState({
+                    //        items: []
+                    //    })
+                    //}
+                //}
+            })
+            .catch((e) => console.warn('something wrong fetch', e))
     }
 
-    render(): JSX.Element {
-        const {items} = this.state;
+    public render():JSX.Element {
         return (
-            <div>
-                <input type="text"/>
-                {items.length ?
-                <div className="dropDownList">
-                    <ul>
-
-                    </ul>
-                </div>
-                    : null
-                    }
-            </div>
+            <div></div>
         )
     }
 }
 
-export {Autocomplete};//mystic with export default and {class}
+class AutocompleteItem extends React.Component<any, any> {
+    public render(): JSX.Element {
+        return (
+            <li>{this.props.item}</li>
+        )
+    }
+}
+
+export {AutocompleteItem, Autocomplete};

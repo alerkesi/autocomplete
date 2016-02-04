@@ -20,11 +20,21 @@ module.exports = {
                 test: /\.tsx?$/,
                 loaders: [
                     'ts-loader'
-                ]
+                ],
+                exclude: /components/
+            },
+            {
+                test: /\.styl/,
+                loaders: [
+                    'style-loader',
+                    'css-loader',
+                    'stylus-loader'
+                ],
+                exclude: /node_modules/
             }
         ]
     },
     ts: {
-        transpileOnly: false
+        transpileOnly: true
     }
 };
