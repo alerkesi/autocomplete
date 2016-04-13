@@ -40,6 +40,11 @@ export interface IUser {
 }
 
 class Autocomplete extends React.Component<IAutocompleteProps, IAutocompleteState> {
+    refs: {
+        [string: string]: any;
+        myInput: HTMLInputElement;
+    };
+
     constructor(props) {
         super(props);
 
