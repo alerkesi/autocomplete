@@ -1,8 +1,6 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 
-import './styles/style';
-
 const nodeInRoot: Function = (node, root) => {
     while (node) {
         if (node === root) {
